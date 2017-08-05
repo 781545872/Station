@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客编写</title>
+</head>
+<body>
+<form action="./create" method="post">
+    <%
+    if(typeof(error)!=='undefined'){
+    %>
+    <label for=""><%=error%></label>
+    <%
+    }
+    %>
+    <%
+    if(typeof(success)!=='undefined'){
+    %>
+    <label for=""><%=success%></label>
+    <%
+    }
+    %>
+    <div>
+        <label for="blog_title">标题</label>
+        <input type="text" placeholder="Title" id='blog_title' name="blog_title" required>
+    </div>
+    <div>
+        <label for="blog_content">内容</label>
+        <textarea name="blog_content" id="blog_content" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="发表">
+    </div>
+</form>
+</body>
+</html>
