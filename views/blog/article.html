@@ -1,0 +1,177 @@
+<%-layout('layout')%>
+<div class="container">
+    <div class="col-sm-8">
+        <div class="panel panel-body">
+            <h1>文章标题</h1>
+            <!--文章标签-->
+            <span class="label control-label label-primary">
+                <span class="glyphicon glyphicon-user"></span>
+                ZZF
+            </span>
+            &nbsp
+            <span class="label label-success">
+                <span class="glyphicon glyphicon-flag"></span>
+                随笔
+            </span>
+            &nbsp
+
+            <span class="label label-info">
+                <span class="glyphicon glyphicon-calendar"></span>
+                2017-7-6
+            </span>
+            <div>
+                安装好opensuse42.2之后，默认是KDE桌面，英语环境，键盘布局也是US,这时候是没有中文输入法的。在opensuse下比较好用的输入法是Fcitx。 安装命令：
+
+                sudo zypper install fcitx
+                　　这里安装的只是输入法框架，框架内置多种中文输入法，可以选择Google Pinyin或者Pinyin
+
+                　　安装命令是：
+
+                sudo zypper install fcitx-googlepinyin  fcitx-pinyin
+                　　然后修改配置文件应用修改：
+
+                sudo vi /etc/sysconfig/language
+                　　将INPUT_METHOD="" 改为 INPUT_METHOD="fcitx"
+
+                　　最后修改环境变量：
+
+                vi ~/.bashrc
+                　　添加
+
+                export GTK_IM_MODULE=fcitx
+                export XMODIFIERS=@im=fcitx
+                export QT_IM_MODULE=fcitx
+                　　刷新环境变量
+
+                source  ~/.bashrc
+                　　此时可以通过右下角的小键盘,打开Configure选项进行设置,切换的快捷键为Ctrl+space
+
+                866039660.png
+
+                　　在安装过程中发现若没有修改环境变量则无法进行切换。 　　
+            </div>
+        </div>
+        <!--评论区-->
+        <div class="panel panel-body">
+            <div class="panel-heading"><h4>吐槽</h4></div>
+            <div class="panel-body">
+                <%-partial('editor')%>
+            </div>
+            <hr class="hr-strong">
+            <div class="panel panel-body">
+                <div class="panel-heading"><h4>最新评论</h4></div>
+                <div class="panel-body">
+                    <!--评论-->
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object img-thumbnail img-rounded img-circle comments-img" src="https://www.hongweipeng.com/usr/themes/GreenGrapes/img/bg.jpg" alt="评论人头像">
+                        </div>
+                        <div class="media-body">
+                            <div>
+                                <h6>ZZF</h6>
+                                <div class="pull-right">
+                                    2017年7月14日 11:57
+                                </div>
+                            </div>
+                            <p>6666666666</p>
+                            <ul class="list-group pull-right action-click">
+                                <li><a href="#">举报</a></li>
+                                <li><a href="#">回复</a></li>
+                                <li><a href="#">点赞</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--评论-->
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object img-thumbnail img-rounded img-circle comments-img" src="https://www.hongweipeng.com/usr/themes/GreenGrapes/img/bg.jpg" alt="评论人头像">
+                        </div>
+                        <div class="media-body">
+                            <div>
+                                <h6>ZZF</h6>
+                                <div class="pull-right">
+                                    2017年7月14日 11:57
+                                </div>
+                            </div>
+                            <p>6666666666</p>
+                            <ul class="list-group pull-right action-click">
+                                <li><a href="#">举报</a></li>
+                                <li><a href="#">回复</a></li>
+                                <li><a href="#">点赞</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--评论-->
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object img-thumbnail img-rounded img-circle comments-img" src="https://www.hongweipeng.com/usr/themes/GreenGrapes/img/bg.jpg" alt="评论人头像">
+                        </div>
+                        <div class="media-body">
+                            <div>
+                                <h6>ZZF</h6>
+                                <div class="pull-right">
+                                    2017年7月14日 11:57
+                                </div>
+                            </div>
+                            <p>6666666666</p>
+                            <ul class="list-group pull-right action-click">
+                                <li><a href="#">举报</a></li>
+                                <li><a href="#">回复</a></li>
+                                <li><a href="#">点赞</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--评论-->
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object img-thumbnail img-rounded img-circle comments-img" src="https://www.hongweipeng.com/usr/themes/GreenGrapes/img/bg.jpg" alt="评论人头像">
+                        </div>
+                        <div class="media-body">
+                            <div>
+                                <h6>ZZF</h6>
+                                <div class="pull-right">
+                                    2017年7月14日 11:57
+                                </div>
+                            </div>
+                            <p>6666666666</p>
+                            <ul class="list-group pull-right action-click">
+                                <li><a href="#">举报</a></li>
+                                <li><a href="#">回复</a></li>
+                                <li><a href="#">点赞</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--评论-->
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object img-thumbnail img-rounded img-circle comments-img" src="https://www.hongweipeng.com/usr/themes/GreenGrapes/img/bg.jpg" alt="评论人头像">
+                        </div>
+                        <div class="media-body">
+                            <div>
+                                <h6>ZZF</h6>
+                                <div class="pull-right">
+                                    2017年7月14日 11:57
+                                </div>
+                            </div>
+                            <p>6666666666</p>
+                            <ul class="list-group pull-right action-click">
+                                <li><a href="#">举报</a></li>
+                                <li><a href="#">回复</a></li>
+                                <li><a href="#">点赞</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <%-partial('pagination')%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--侧边栏-->
+    <div class="col-sm-4 hidden-xs">
+        <%-partial('sidebar')%>
+    </div>
+</div>

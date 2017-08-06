@@ -1,6 +1,7 @@
 var blogModel = require('../models/blog');
 var eventproxy = require('eventproxy');
 var dateFormat = require('../time-helper');
+
 exports.index = function(req,res){
     //每页显示的条数
     var count = 1;
@@ -16,14 +17,12 @@ exports.index = function(req,res){
         if(err){
             res.render('error');
         }
-        else{
-            blogs.map(function(blog){
-                //新增加一个字符串为编写日期，便于显示
-                blog.timeStr = dateFormat(blog.blog_date);
-                return blog;
-            });
-            ep.emit('blog_data_ok',blogs);
-        }
+        blogs.map(function(blog){
+            //新增加一个字符串为编写日期，便于显示
+            blog.timeStr = dateFormat(blog.blog_date);
+            return blog;
+        });
+        ep.emit('blog_data_ok',blogs);
     });
     blogModel.count({},function(err,pageCount){
         if(err){
@@ -40,11 +39,7 @@ exports.index = function(req,res){
     });
     //当两次获取数据完成之后调用事件
     ep.all('blog_data_ok','blog_count_ok',function(blogs,pageCount){
-        console.log(page);
-        res.render('site/index',{blogs:blogs,pageCount:pageCount,page:page});
+        res.render('blog/index',{blogs:blogs,pageCount:pageCount,page:page});
     })
 };
 
-exports.detail = function(req,res){
-
-};

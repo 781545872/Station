@@ -1,0 +1,47 @@
+<%-layout('layout') %>
+<div class="container">
+    <!--左侧文章列表-->
+    <div class="col-sm-8">
+        <!--搜索框,在xs时显示-->
+        <div class="panel panel-body panel-default hidden-lg hidden-md hidden-sm">
+            <form action="/search" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span>查找</button>
+                    </span>
+                </div><!-- /input-group -->
+            </form>
+        </div>
+        <%
+        blogs.forEach(function(blog){
+        %>
+        <div class="panel panel-body panel-default">
+            <span class="label label-success">随笔</span>
+            <h2><a href="#"><%= blog.blog_title %></a></h2>
+            <hr>
+            <p><%= blog.blog_content %></p>
+            <hr>
+            <div>
+                <a class="btn btn-primary" href="./detail/<%=blog._id%>">
+                    阅读全文
+                </a>
+                <div class="pull-right">
+                    <span class="glyphicon glyphicon-time"><%= blog.timeStr %></span>
+                    <span class="glyphicon glyphicon-user"><%= blog.username %></span>
+                    <span class="glyphicon glyphicon-comment"><%= blog.view_count %></span>
+                </div>
+            </div>
+        </div>
+        <%
+        })
+        %>
+
+        <%-partial('pagination')%>
+    </div>
+
+    <!--侧边栏-->
+    <div class="col-sm-4 hidden-xs">
+        <%-partial('sidebar')%>
+    </div>
+</div>

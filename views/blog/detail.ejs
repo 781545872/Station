@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>博文详情</title>
+</head>
+<body>
+<div>
+    <h1><%=blog.blog_title%></h1>
+    <h2><%=blog.timeStr%></h2>
+    <h2><%=blog.username%></h2>
+    <h2><%=blog.blog_tag%></h2>
+    <h2>评论条数：<%=comments.length%></h2>
+    <h2>访问次数：<%=blog.view_count%></h2>
+</div>
+<div>
+    <p><%=blog.blog_content%></p>
+</div>
+<!--评论-->
+<ul>
+    <%comments.forEach(function(comment){
+        %><li><%=comment.username%><%=comment.comment_content%><%=comment.timeStr%></li><%
+    })%>
+</ul>
+<div>
+    <form action="./reply" method="post">
+        <h1>评论</h1>
+        <input type="hidden" name="blog_id" value="<%=blog._id%>">
+        <textarea name="comment_content" id="comment_content" cols="30" rows="10" required></textarea>
+        <input type="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>

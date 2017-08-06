@@ -3,6 +3,7 @@ var router = express.Router();
 var signController = require('../controllers/sign-controller');
 var blogController = require('../controllers/blog-controller');
 var siteController = require('../controllers/site-controller');
+var replyController = require('../controllers/reply-controller');
 var auth = require('../middlewares/auth');
 
 //显示登录界面
@@ -22,7 +23,9 @@ router.post('/create',blogController.create);
 //显示主页
 router.get('/',siteController.index);
 //显示博文详情
-router.get('/blog/detail',siteController.detail);
+router.get('/detail/:id',blogController.detail);
+//回复博文
+router.post('/detail/reply',auth,replyController.reply);
 
 
 

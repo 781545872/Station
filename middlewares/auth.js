@@ -4,6 +4,6 @@ module.exports = function(req,res,next){
         return next();
     }
     else{
-        res.render('sign/signin');
+        res.redirect('/signin');
     }
 }

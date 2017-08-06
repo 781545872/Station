@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title><%=title%></title>
+    <!-- Bootstrap -->
+    <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/css/style.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/public/js/html5shiv.js"></script>
+    <script src="/public/js/respond.js"></script>
+    <![endif]-->
+
+
+
+
+    <!--添加额外的css文件-->
+    <%- block('head').toString() %>
+</head>
+<body>
+<!--头部和导航栏-->
+<%-partial('navbar')%>
+
+<%- body -%>
+<!--底部版权信息-->
+<%-partial('footer')%>
+<!--添加额外的js文件-->
+<%- block('footer').toString() %>
+<script src="/public/js/jquery.js"></script>
+<script src="/public/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>
