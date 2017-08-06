@@ -1,8 +1,81 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body{
+  background: #eeeded;
+  color:#666;
 }
 
-a {
-  color: #00B7FF;
+a{
+  color:#666;
 }
+
+
+.header-bg1{
+  background-image: url(https://www.hongweipeng.com/usr/themes/GreenGrapes/img/bg.jpg);
+  height:339px;
+  width:100%;
+  position: absolute;
+  left: 0;
+  top:0;
+}
+
+.header-bg2{
+  position:absolute;
+  top: 0;
+  left: 0;
+  background: #337ab7;
+  height:339px;
+  width:100%;
+  opacity: 0.5;
+}
+
+.logo{
+  margin-top:50px;
+  margin-bottom:30px;
+}
+
+.about{
+  margin-top:20px;
+  color:#fff;
+}
+
+.my-header{
+  position: relative;
+  z-index:34;
+}
+
+.my-header a{
+  color:#fff;
+}
+
+.my-navbar{
+  border:none;
+  border-radius:0;
+  background: #4a4a4a;
+}
+
+#newest_articles h4:last-child{
+
+}
+
+.hr-strong{
+  border:1px solid #337ab7;
+}
+
+#newest_comments h6,a{
+  color:#4075a2;
+}
+
+.comments-img{
+  height:80px;
+}
+
+.footer{
+  background:#ffffff;
+  margin-top:30px;
+  padding-top:40px;
+  padding-bottom:40px;
+}
+
+ul.action-click li{
+  display:inline-block;
+}
+

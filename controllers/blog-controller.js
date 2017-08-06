@@ -40,7 +40,7 @@ exports.detail = function(req,res){
     var ep = eventproxy();
     blogModel.getBlog(id,function(err,blog){
         if(err){
-            res.render('error');
+            return res.render('error');
         }
        if(blog){
            //当有用户访问时view_count字段加1
@@ -56,9 +56,9 @@ exports.detail = function(req,res){
            res.render('blog/index');
        }
     });
-    commentModel.getComments(id,function(err,comments){
+    commentModel.getComments({_id:id},{},function(err,comments){
        if(err){
-           res.render('error');
+           return res.render('error');
        }
        //map函数是同步的，嘻嘻,所以放心的在后面继续写逻辑
        comments.map(function(comment){

@@ -29,6 +29,7 @@
     <form action="./reply" method="post">
         <h1>评论</h1>
         <input type="hidden" name="blog_id" value="<%=blog._id%>">
+        <input type="hidden" name="blog_title" value="<%=blog.blog_title%>">
         <textarea name="comment_content" id="comment_content" cols="30" rows="10" required></textarea>
         <input type="submit" value="提交">
     </form>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <%
+    if(current_user){
+    %>
+    <a href="./signout">注销</a>
+    <%
+    }
+    else{
+    %>
+    <a href="./signin">登录</a>
+    <%
+    }
+    %>
+    <ul>
+        <%
+        blogs.forEach(function(blog){
+        %>
+        <li><a href="./detail/<%=blog._id%>"><%= blog.blog_title %></a><%= blog.blog_content %><%= blog.timeStr %><%= blog.username %></li>
+        <%
+        })
+        %>
+    </ul>
+
+    <a href="./signup">注册</a>
+    <ul class="pagination">
+        <li><a href="../site?page=1">&lt&lt</a></li>
+
+        <%
+        //如果不做类型转换，page取到的是String类型，下面所做的判断基本都乱套了
+        page = Number(page);
+        if(page - 2 > 0){
+        %>
+        <li><a href="#">...</a></li>
+        <%
+        }
+        %>
+        <% var i = 2;
+                while(i > 0){
+        if(page - i > 0){
+        %>
+        <li><a href="../site?page=<%= page - i %>"><%= page - i %></a></li>
+        <%
+        }i--;
+        }
+        %>
+        <li><a href="#"><%= page %></a></li>
+        <% i = 1;
+                while(i <= 2){
+        if(page + i <= pageCount){
+        %>
+        <li><a href="../site?page=<%= page + i %>"><%= page + i %></a></li>
+        <%
+        }i++;
+        }
+        %>
+        <%
+        if(page + 2 < pageCount){
+        %>
+        <li><a href="#">...</a></li>
+        <%
+        }
+        %>
+        <li><a href="../site?page=<%= pageCount %>">&gt&gt</a></li>
+    </ul>
+    <script type="text/javascript">
+        function request()
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET","/ajax/demo_get.asp",true);
+            xmlhttp.send();
+        }
+    </script>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/public/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

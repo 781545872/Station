@@ -1,115 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
-
-    <!-- Bootstrap -->
-    <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
+<%- layout('layout') %>
 <div class="container">
-    <%
-    if(current_user){
-    %>
-    <a href="./signout">注销</a>
-    <%
-    }
-    else{
-    %>
-    <a href="./signin">登录</a>
-    <%
-    }
-    %>
-    <ul>
+    <!--左侧文章列表-->
+    <div class="col-sm-8">
+        <!--搜索框,在xs时显示-->
+        <div class="panel panel-body panel-default hidden-lg hidden-md hidden-sm">
+            <form action="/search" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span>查找</button>
+                    </span>
+                </div><!-- /input-group -->
+            </form>
+        </div>
         <%
         blogs.forEach(function(blog){
         %>
-        <li><a href="./detail/<%=blog._id%>"><%= blog.blog_title %></a><%= blog.blog_content %><%= blog.timeStr %><%= blog.username %></li>
+        <div class="panel panel-body panel-default">
+            <span class="label label-success"><%=blog.blog_tag%></span>
+            <h2><a href="#"><%= blog.blog_title %></a></h2>
+            <hr>
+            <p><%= blog.blog_content %></p>
+            <hr>
+            <div>
+                <a class="btn btn-primary" href="./detail/<%= blog._id %>">
+                    阅读全文
+                </a>
+                <div class="pull-right">
+                    <span class="glyphicon glyphicon-time"><%= blog.timeStr %></span>
+                    <span class="glyphicon glyphicon-user"><%= blog.username %></span>
+                    <span class="glyphicon glyphicon-comment"><%= blog.view_count %></span>
+                </div>
+            </div>
+        </div>
         <%
         })
         %>
-    </ul>
 
-    <a href="./signup">注册</a>
-    <ul class="pagination">
-        <li><a href="../site?page=1">&lt&lt</a></li>
+        <!--分页-->
+        <ul class="pagination">
+            <li><a href="/?page=1">&lt&lt</a></li>
 
-        <%
-        //如果不做类型转换，page取到的是String类型，下面所做的判断基本都乱套了
-        page = Number(page);
-        if(page - 2 > 0){
-        %>
-        <li><a href="#">...</a></li>
-        <%
-        }
-        %>
-        <% var i = 2;
-                while(i > 0){
-        if(page - i > 0){
-        %>
-        <li><a href="../site?page=<%= page - i %>"><%= page - i %></a></li>
-        <%
-        }i--;
-        }
-        %>
-        <li><a href="../site?page=<%= page %>"><%= page %></a></li>
-        <% i = 1;
-                while(i <= 2){
-        if(page + i <= pageCount){
-        %>
-        <li><a href="../site?page=<%= page + i %>"><%= page + i %></a></li>
-        <%
-        }i++;
-        }
-        %>
-        <%
-        if(page + 2 < pageCount){
-        %>
-        <li><a href="#">...</a></li>
-        <%
-        }
-        %>
-        <li><a href="../site?page=<%= pageCount %>">&gt&gt</a></li>
-    </ul>
-    <script type="text/javascript">
-        function request()
+            <%
+            //如果不做类型转换，page取到的是String类型，下面所做的判断基本都乱套了
+            page = Number(page);
+            if(page - 2 > 0){
+            %>
+            <li><a href="javascript:void(0)">...</a></li>
+            <%
+            }
+            %>
+            <% var i = 2;
+                    while(i > 0){
+            if(page - i > 0){
+            %>
+            <li><a href="javascript:void(0)" onclick="loadPage(<%=page-i%>)"><%= page - i %></a></li>
+            <%
+            }i--;
+            }
+            %>
+            <li><a href="javascript:void(0)" onclick="loadPage(<%=page%>)"><%= page %></a></li>
+            <% i = 1;
+                    while(i <= 2){
+            if(page + i <= pageCount){
+            %>
+            <li><a href="javascript:void(0)" onclick="loadPage(<%=page+i%>)"><%= page + i %></a></li>
+            <%
+            }i++;
+            }
+            %>
+            <%
+            if(page + 2 < pageCount){
+            %>
+            <li><a href="javascript:void(0)">...</a></li>
+            <%
+            }
+            %>
+            <li><a href="javascript:void(0) %>">&gt&gt</a></li>
+        </ul>
+    </div>
+    <!--利用ajax进行分页请求-->
+    <script>
+        function loadPage(page)
         {
             var xmlhttp;
             if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
+            {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
                 xmlhttp=new XMLHttpRequest();
             }
             else
-            {// code for IE6, IE5
+            {
+                // IE6, IE5 浏览器执行代码
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
             xmlhttp.onreadystatechange=function()
             {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
-                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                    var blogs = xmlhttp.responseText;
+                    alert(blogs);
                 }
             }
-            xmlhttp.open("GET","/ajax/demo_get.asp",true);
+            xmlhttp.open("GET","/?page="+page,true);
             xmlhttp.send();
         }
     </script>
+
+    <!--侧边栏-->
+    <div class="col-sm-4 hidden-xs">
+        <%- partial('sidebar') %>
+    </div>
 </div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/public/bootstrap/js/bootstrap.js"></script>
-</body>
-</html>
